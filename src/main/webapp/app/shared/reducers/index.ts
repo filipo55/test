@@ -6,6 +6,10 @@ import applicationProfile, { ApplicationProfileState } from './application-profi
 
 import administration, { AdministrationState } from 'app/modules/administration/administration.reducer';
 import userManagement, { UserManagementState } from './user-management';
+// prettier-ignore
+import measurement, {
+  MeasurementState
+} from 'app/entities/measurement/measurement.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -13,6 +17,7 @@ export interface IRootState {
   readonly applicationProfile: ApplicationProfileState;
   readonly administration: AdministrationState;
   readonly userManagement: UserManagementState;
+  readonly measurement: MeasurementState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -22,6 +27,7 @@ const rootReducer = combineReducers<IRootState>({
   applicationProfile,
   administration,
   userManagement,
+  measurement,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });

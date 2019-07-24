@@ -22,7 +22,7 @@ export class Home extends React.Component<IHomeProp> {
     return (
       <Row>
         <Col md="9">
-          <h2>Welcome, Java Hipster!</h2>
+          <h2>Welcome, Java hipster</h2>
           <p className="lead">This is your homepage</p>
           {account && account.login ? (
             <div>
@@ -78,6 +78,9 @@ export class Home extends React.Component<IHomeProp> {
             </a>
             !
           </p>
+          <form action="http://localhost:5000">
+            <input type="submit" value="Go to Viewer" />
+          </form>
         </Col>
         <Col md="3" className="pad">
           <span className="hipster rounded" />
