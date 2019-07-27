@@ -112,6 +112,12 @@ export class MeasurementUpdate extends React.Component<IMeasurementUpdateProps, 
                   </Label>
                   <AvField id="measurement-description" type="text" name="description" />
                 </AvGroup>
+                <AvGroup>
+                  <Label id="patientIdLabel" for="measurement-patientId">
+                    Patient Id
+                  </Label>
+                  <AvField id="measurement-patientId" type="text" name="patientId" />
+                </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/measurement" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />
                   &nbsp;

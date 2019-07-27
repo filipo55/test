@@ -18,6 +18,10 @@
         {
             "fieldName": "description",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "patientId",
+            "fieldType": "String"
         }
     ],
     "dto": "no",

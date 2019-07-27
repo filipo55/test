@@ -76,6 +76,9 @@ export class Measurement extends React.Component<IMeasurementProps, IMeasurement
                   <th className="hand" onClick={this.sort('description')}>
                     Description <FontAwesomeIcon icon="sort" />
                   </th>
+                  <th className="hand" onClick={this.sort('patientId')}>
+                    Patient Id <FontAwesomeIcon icon="sort" />
+                  </th>
                   <th />
                 </tr>
               </thead>
@@ -90,6 +93,7 @@ export class Measurement extends React.Component<IMeasurementProps, IMeasurement
                     <td>{measurement.area}</td>
                     <td>{measurement.label}</td>
                     <td>{measurement.description}</td>
+                    <td>{measurement.patientId}</td>
                     <td className="text-right">
                       <div className="btn-group flex-btn-group-container">
                         <Button tag={Link} to={`${match.url}/${measurement.id}`} color="info" size="sm">

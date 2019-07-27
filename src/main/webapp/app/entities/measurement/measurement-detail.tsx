@@ -40,6 +40,10 @@ export class MeasurementDetail extends React.Component<IMeasurementDetailProps> 
               <span id="description">Description</span>
             </dt>
             <dd>{measurementEntity.description}</dd>
+            <dt>
+              <span id="patientId">Patient Id</span>
+            </dt>
+            <dd>{measurementEntity.patientId}</dd>
           </dl>
           <Button tag={Link} to="/entity/measurement" replace color="info">
             <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

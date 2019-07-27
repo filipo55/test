@@ -27,6 +27,9 @@ public class Measurement implements Serializable {
     @Field("description")
     private String description;
 
+    @Field("patient_id")
+    private String patientId;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
         return id;
@@ -74,6 +77,19 @@ public class Measurement implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getPatientId() {
+        return patientId;
+    }
+
+    public Measurement patientId(String patientId) {
+        this.patientId = patientId;
+        return this;
+    }
+
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -99,6 +115,7 @@ public class Measurement implements Serializable {
             ", area=" + getArea() +
             ", label='" + getLabel() + "'" +
             ", description='" + getDescription() + "'" +
+            ", patientId='" + getPatientId() + "'" +
             "}";
     }
 }

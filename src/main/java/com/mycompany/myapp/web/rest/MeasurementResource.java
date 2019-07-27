@@ -1,16 +1,12 @@
 package com.mycompany.myapp.web.rest;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.mongodb.util.JSON;
 import com.mycompany.myapp.domain.Measurement;
 import com.mycompany.myapp.repository.MeasurementRepository;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
-import com.nimbusds.jose.util.JSONObjectUtils;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
-import net.minidev.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,15 +18,12 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.spring.web.json.Json;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.text.ParseException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -61,17 +54,7 @@ public class MeasurementResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/measurements")
-    public ResponseEntity<Measurement> createMeasurement(@RequestBody String json) throws URISyntaxException, ParseException {
-
-        JSONObject jsonObject = JSONObjectUtils.parse(json);
-        Measurement measurement = new Measurement();
-
-        if (Objects.nonNull(jsonObject.getAsString("id"))) measurement.setId(jsonObject.getAsString("id"));
-        measurement.setArea(Float.valueOf(jsonObject.getAsString("area")));
-        measurement.setDescription(jsonObject.getAsString("description"));
-        measurement.setLabel(jsonObject.getAsString("label"));
-
-
+    public ResponseEntity<Measurement> createMeasurement(@Valid @RequestBody Measurement measurement) throws URISyntaxException {
         log.debug("REST request to save Measurement : {}", measurement);
         if (measurement.getId() != null) {
             throw new BadRequestAlertException("A new measurement cannot already have an ID", ENTITY_NAME, "idexists");

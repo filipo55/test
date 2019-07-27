@@ -42,6 +42,9 @@ public class MeasurementResourceIT {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
+    private static final String DEFAULT_PATIENT_ID = "AAAAAAAAAA";
+    private static final String UPDATED_PATIENT_ID = "BBBBBBBBBB";
+
     @Autowired
     private MeasurementRepository measurementRepository;
 
@@ -83,7 +86,8 @@ public class MeasurementResourceIT {
         Measurement measurement = new Measurement()
             .area(DEFAULT_AREA)
             .label(DEFAULT_LABEL)
-            .description(DEFAULT_DESCRIPTION);
+            .description(DEFAULT_DESCRIPTION)
+            .patientId(DEFAULT_PATIENT_ID);
         return measurement;
     }
     /**
@@ -96,7 +100,8 @@ public class MeasurementResourceIT {
         Measurement measurement = new Measurement()
             .area(UPDATED_AREA)
             .label(UPDATED_LABEL)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .patientId(UPDATED_PATIENT_ID);
         return measurement;
     }
 
@@ -123,6 +128,7 @@ public class MeasurementResourceIT {
         assertThat(testMeasurement.getArea()).isEqualTo(DEFAULT_AREA);
         assertThat(testMeasurement.getLabel()).isEqualTo(DEFAULT_LABEL);
         assertThat(testMeasurement.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testMeasurement.getPatientId()).isEqualTo(DEFAULT_PATIENT_ID);
     }
 
     @Test
@@ -156,7 +162,8 @@ public class MeasurementResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(measurement.getId())))
             .andExpect(jsonPath("$.[*].area").value(hasItem(DEFAULT_AREA.doubleValue())))
             .andExpect(jsonPath("$.[*].label").value(hasItem(DEFAULT_LABEL.toString())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].patientId").value(hasItem(DEFAULT_PATIENT_ID.toString())));
     }
     
     @Test
@@ -171,7 +178,8 @@ public class MeasurementResourceIT {
             .andExpect(jsonPath("$.id").value(measurement.getId()))
             .andExpect(jsonPath("$.area").value(DEFAULT_AREA.doubleValue()))
             .andExpect(jsonPath("$.label").value(DEFAULT_LABEL.toString()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.patientId").value(DEFAULT_PATIENT_ID.toString()));
     }
 
     @Test
@@ -193,7 +201,8 @@ public class MeasurementResourceIT {
         updatedMeasurement
             .area(UPDATED_AREA)
             .label(UPDATED_LABEL)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .patientId(UPDATED_PATIENT_ID);
 
         restMeasurementMockMvc.perform(put("/api/measurements")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -207,6 +216,7 @@ public class MeasurementResourceIT {
         assertThat(testMeasurement.getArea()).isEqualTo(UPDATED_AREA);
         assertThat(testMeasurement.getLabel()).isEqualTo(UPDATED_LABEL);
         assertThat(testMeasurement.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testMeasurement.getPatientId()).isEqualTo(UPDATED_PATIENT_ID);
     }
 
     @Test
