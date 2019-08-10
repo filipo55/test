@@ -1,0 +1,48 @@
+entity Patient {
+	name String,
+    patientSex Sex
+}
+
+enum Sex {
+MALE,
+FEMALE
+}
+
+entity Study {
+	studyInstanceUID String,
+    studyDate LocalDate,
+    requestedProcedureDescription String,
+    accessionNumber String
+}
+
+entity Descriptor {
+    dateCreated LocalDate,
+    
+}
+
+relationship OneToMany {
+	Patient{Study} to Study
+}
+
+relationship OneToMany{
+Study {Descriptor} to Descriptor
+}
+
+relationship ManyToOne{
+Study {Patient} to Patient
+}
+
+relationship ManyToMany{
+Descriptor {Descriptor} to Descriptor
+}
+
+relationship ManyToOne{
+Descriptor {Descriptor} to Study
+}
+
+// Set pagination options
+paginate Descriptor with infinite-scroll
+paginate Patient, Study with pagination
+
+
+filter *

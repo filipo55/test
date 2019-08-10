@@ -1,0 +1,31 @@
+{
+    "name": "Patient",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "patientSex",
+            "fieldType": "Sex",
+            "fieldValues": "MALE,FEMALE"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "study",
+            "otherEntityRelationshipName": "patient",
+            "relationshipName": "study"
+        }
+    ],
+    "changelogDate": "20190810165537",
+    "entityTableName": "patient",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

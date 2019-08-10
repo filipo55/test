@@ -1,0 +1,51 @@
+{
+    "name": "Study",
+    "fields": [
+        {
+            "fieldName": "studyInstanceUID",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studyDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "requestedProcedureDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "accessionNumber",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "patient",
+            "otherEntityName": "patient",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "descriptor",
+            "otherEntityRelationshipName": "study",
+            "relationshipName": "descriptor"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "patient",
+            "otherEntityRelationshipName": "study",
+            "relationshipName": "patient",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190810165538",
+    "entityTableName": "study",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
