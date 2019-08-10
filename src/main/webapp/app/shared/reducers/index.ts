@@ -10,6 +10,18 @@ import userManagement, { UserManagementState } from './user-management';
 import measurement, {
   MeasurementState
 } from 'app/entities/measurement/measurement.reducer';
+// prettier-ignore
+import patient, {
+  PatientState
+} from 'app/entities/patient/patient.reducer';
+// prettier-ignore
+import study, {
+  StudyState
+} from 'app/entities/study/study.reducer';
+// prettier-ignore
+import descriptor, {
+  DescriptorState
+} from 'app/entities/descriptor/descriptor.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -18,6 +30,9 @@ export interface IRootState {
   readonly administration: AdministrationState;
   readonly userManagement: UserManagementState;
   readonly measurement: MeasurementState;
+  readonly patient: PatientState;
+  readonly study: StudyState;
+  readonly descriptor: DescriptorState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -28,6 +43,9 @@ const rootReducer = combineReducers<IRootState>({
   administration,
   userManagement,
   measurement,
+  patient,
+  study,
+  descriptor,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });
