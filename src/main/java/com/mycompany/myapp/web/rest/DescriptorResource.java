@@ -1,7 +1,9 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Descriptor;
+import com.mycompany.myapp.repository.StudyRepository;
 import com.mycompany.myapp.service.DescriptorService;
+import com.mycompany.myapp.service.StudyService;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -9,6 +11,7 @@ import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,11 +21,19 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.nimbusds.jose.util.JSONObjectUtils;
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.PaginationUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import net.minidev.json.JSONObject;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -41,6 +52,9 @@ public class DescriptorResource {
 
     private final DescriptorService descriptorService;
 
+    @Autowired
+    StudyRepository studyRepository;
+
     public DescriptorResource(DescriptorService descriptorService) {
         this.descriptorService = descriptorService;
     }
@@ -48,16 +62,28 @@ public class DescriptorResource {
     /**
      * {@code POST  /descriptors} : Create a new descriptor.
      *
-     * @param descriptor the descriptor to create.
+     * @param json the descriptor to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new descriptor, or with status {@code 400 (Bad Request)} if the descriptor has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/descriptors")
-    public ResponseEntity<Descriptor> createDescriptor(@RequestBody Descriptor descriptor) throws URISyntaxException {
-        log.debug("REST request to save Descriptor : {}", descriptor);
-        if (descriptor.getId() != null) {
-            throw new BadRequestAlertException("A new descriptor cannot already have an ID", ENTITY_NAME, "idexists");
+    public ResponseEntity<Descriptor> createDescriptor(@RequestBody String json) throws URISyntaxException, ParseException {
+        log.debug("REST request to save Descriptor : {}", json);
+        JSONObject jsonObject = JSONObjectUtils.parse(json);
+        Descriptor descriptor = new Descriptor();
+        descriptor.setDateCreated(LocalDate.now());
+        if (Objects.nonNull(jsonObject.getAsString("id")))
+            descriptor.setId(jsonObject.getAsString("id"));
+
+        if(Objects.nonNull(jsonObject.getAsString("studyInstanceUID")))
+        {
+            descriptor.setStudy(studyRepository.findById((jsonObject.getAsString("studyInstanceUID"))).get());
         }
+
+
+//        if (descriptor.getId() != null) {
+//            throw new BadRequestAlertException("A new descriptor cannot already have an ID", ENTITY_NAME, "idexists");
+//        }
         Descriptor result = descriptorService.save(descriptor);
         return ResponseEntity.created(new URI("/api/descriptors/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
