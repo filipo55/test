@@ -78,6 +78,7 @@ public class DescriptorResource {
         //TODO: Fix study Repository
         if(Objects.nonNull(jsonObject.getAsString("studyInstanceUID")))
         {
+            if((studyRepository.findById((jsonObject.getAsString("studyInstanceUID")))).isPresent())
             descriptor.setStudy(studyRepository.findById((jsonObject.getAsString("studyInstanceUID"))).get());
         }
 
