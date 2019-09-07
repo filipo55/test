@@ -42,6 +42,7 @@ public class MeasurementResource {
 
     private final MeasurementRepository measurementRepository;
 
+
     public MeasurementResource(MeasurementRepository measurementRepository) {
         this.measurementRepository = measurementRepository;
     }

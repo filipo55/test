@@ -1,6 +1,7 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Descriptor;
+import com.mycompany.myapp.domain.Study;
 import com.mycompany.myapp.repository.StudyRepository;
 import com.mycompany.myapp.service.DescriptorService;
 import com.mycompany.myapp.service.StudyService;
@@ -52,8 +53,10 @@ public class DescriptorResource {
 
     private final DescriptorService descriptorService;
 
+
+
     @Autowired
-    StudyRepository studyRepository;
+    StudyService studyService;
 
     public DescriptorResource(DescriptorService descriptorService) {
         this.descriptorService = descriptorService;
@@ -76,10 +79,30 @@ public class DescriptorResource {
             descriptor.setId(jsonObject.getAsString("id"));
 
         //TODO: Fix study Repository
+
         if(Objects.nonNull(jsonObject.getAsString("studyInstanceUID")))
         {
-            if((studyRepository.findById((jsonObject.getAsString("studyInstanceUID")))).isPresent())
-            descriptor.setStudy(studyRepository.findById((jsonObject.getAsString("studyInstanceUID"))).get());
+            String studyInstanceUID = jsonObject.getAsString("studyInstanceUID");
+            log.debug("Setting up study with UID: " + studyInstanceUID);
+
+            studyService.GetStudyByUID((studyInstanceUID)).ifPresent(study -> descriptor.setStudy(study));
+            if((studyService.GetStudyByUID((studyInstanceUID))).isPresent() == false)
+                log.debug("NO STUDY WITH UID: " + studyInstanceUID);
+//          COMMENTED STUFF USED TO DEBUG
+//            if((studyService.GetStudyByUID((studyInstanceUID))).isPresent())
+//            {
+//                descriptor.setStudy(studyService.GetStudyByUID(studyInstanceUID).get());
+//                log.debug("Setting study with UID: " + studyInstanceUID);
+//            }
+//            else
+//            {
+//                log.debug("Did not found study with UID: " + studyInstanceUID);
+//                List<Study> studyList = studyService.GetAllStudies();
+//                for (int i = 0; i< studyList.size();i++)
+//                {
+//                    log.debug("Found: " + studyList.get(i).getStudyInstanceUID());
+//                }
+//            }
         }
 
 
