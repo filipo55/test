@@ -71,14 +71,13 @@ public class DescriptorResource {
      */
     @PostMapping("/descriptors")
     public ResponseEntity<Descriptor> createDescriptor(@RequestBody String json) throws URISyntaxException, ParseException {
-        log.debug("REST request to save Descriptor : {}", json);
+        log.debug("REST request to save Descriptor : {}" + json);
         JSONObject jsonObject = JSONObjectUtils.parse(json);
         Descriptor descriptor = new Descriptor();
         descriptor.setDateCreated(LocalDate.now());
         if (Objects.nonNull(jsonObject.getAsString("id")))
             descriptor.setId(jsonObject.getAsString("id"));
 
-        //TODO: Fix study Repository
 
         if(Objects.nonNull(jsonObject.getAsString("studyInstanceUID")))
         {
