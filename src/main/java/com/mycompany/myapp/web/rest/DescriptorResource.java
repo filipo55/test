@@ -2,9 +2,11 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Descriptor;
 import com.mycompany.myapp.domain.Study;
+import com.mycompany.myapp.domain.TwoDimensionSpatialCoordinate;
 import com.mycompany.myapp.repository.StudyRepository;
 import com.mycompany.myapp.service.DescriptorService;
 import com.mycompany.myapp.service.StudyService;
+import com.mycompany.myapp.service.TwoDimensionSpatialCoordinateService;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -28,8 +30,20 @@ import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import net.minidev.json.JSONObject;
 
+import javax.xml.parsers.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
+
+import java.io.File;
 
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -54,6 +68,8 @@ public class DescriptorResource {
     private final DescriptorService descriptorService;
 
 
+    @Autowired
+    TwoDimensionSpatialCoordinateService twoDimensionSpatialCoordinateService;
 
     @Autowired
     StudyService studyService;
@@ -65,43 +81,59 @@ public class DescriptorResource {
     /**
      * {@code POST  /descriptors} : Create a new descriptor.
      *
-     * @param json the descriptor to create.
+     * @param xml the descriptor to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new descriptor, or with status {@code 400 (Bad Request)} if the descriptor has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/descriptors")
-    public ResponseEntity<Descriptor> createDescriptor(@RequestBody String json) throws URISyntaxException, ParseException {
-        log.debug("REST request to save Descriptor : {}" + json);
-        JSONObject jsonObject = JSONObjectUtils.parse(json);
+    public ResponseEntity<Descriptor> createDescriptor(@RequestBody String xml) throws URISyntaxException, ParseException, IOException, SAXException, ParserConfigurationException {
+        log.debug("REST request to create descriptor from xml:" + xml);
+
+        File fXmlFile = new File(xml);
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(fXmlFile);
+        doc.getDocumentElement().normalize();
+
+        String studyInstanceUID = doc.getElementsByTagName("imageStudy").item(0).getTextContent();
         Descriptor descriptor = new Descriptor();
         descriptor.setDateCreated(LocalDate.now());
-        if (Objects.nonNull(jsonObject.getAsString("id")))
-            descriptor.setId(jsonObject.getAsString("id"));
+
+        NodeList coordinates = doc.getElementsByTagName("TwoDimensionSpatialCoordinate");
+        for (int i = 0; i < coordinates.getLength(); i++) {
+
+            Node nNode = coordinates.item(i);
+
+            System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+            if (nNode.getNodeType() == Node.ELEMENT_NODE)
+            {
+
+                Element eElement = (Element) nNode;
 
 
-        if(Objects.nonNull(jsonObject.getAsString("studyInstanceUID")))
+                System.out.println("coordinateIndex : " + eElement.getChildNodes().item(1).getAttributes().item(0).getNodeValue());
+                System.out.println("x : " + eElement.getChildNodes().item(3).getAttributes().item(0).getNodeValue());
+                System.out.println("y : " + eElement.getChildNodes().item(5).getAttributes().item(0).getNodeValue());
+
+                TwoDimensionSpatialCoordinate temp = new TwoDimensionSpatialCoordinate();
+                temp.setCoordinateIndex(Integer.parseInt(eElement.getChildNodes().item(1).getAttributes().item(0).getNodeValue()));
+                temp.setX(Float.parseFloat(eElement.getChildNodes().item(3).getAttributes().item(0).getNodeValue()));
+                temp.setY(Float.parseFloat(eElement.getChildNodes().item(5).getAttributes().item(0).getNodeValue()));
+
+                twoDimensionSpatialCoordinateService.save(temp);
+                temp.setDescriptor(descriptor);
+            }
+        }
+
+
+        if(!studyInstanceUID.isEmpty())
         {
-            String studyInstanceUID = jsonObject.getAsString("studyInstanceUID");
             log.debug("Setting up study with UID: " + studyInstanceUID);
 
             studyService.GetStudyByUID((studyInstanceUID)).ifPresent(study -> descriptor.setStudy(study));
             if((studyService.GetStudyByUID((studyInstanceUID))).isPresent() == false)
                 log.debug("NO STUDY WITH UID: " + studyInstanceUID);
-//          COMMENTED STUFF USED TO DEBUG
-//            if((studyService.GetStudyByUID((studyInstanceUID))).isPresent())
-//            {
-//                descriptor.setStudy(studyService.GetStudyByUID(studyInstanceUID).get());
-//                log.debug("Setting study with UID: " + studyInstanceUID);
-//            }
-//            else
-//            {
-//                log.debug("Did not found study with UID: " + studyInstanceUID);
-//                List<Study> studyList = studyService.GetAllStudies();
-//                for (int i = 0; i< studyList.size();i++)
-//                {
-//                    log.debug("Found: " + studyList.get(i).getStudyInstanceUID());
-//                }
-//            }
         }
 
 

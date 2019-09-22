@@ -38,6 +38,10 @@ public class Descriptor implements Serializable {
     @Field("descriptors")
     private Set<Descriptor> descriptors = new HashSet<>();
 
+    @DBRef
+    @Field("twoDimensionalCoordinates")
+    private Set<TwoDimensionSpatialCoordinate> twoDimensionSpatialCoordinates = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
         return id;
@@ -105,6 +109,19 @@ public class Descriptor implements Serializable {
         this.descriptors.remove(descriptor);
         descriptor.getDescriptors().remove(this);
         return this;
+    }
+
+    public void addTwoDimensionSpatialCoordinate(TwoDimensionSpatialCoordinate twoDimensionSpatialCoordinate)
+    {
+        this.twoDimensionSpatialCoordinates.add(twoDimensionSpatialCoordinate);
+        twoDimensionSpatialCoordinate.setDescriptor(this);
+
+    }
+
+    public void removeTwoDimensionSpatialCoordinate(TwoDimensionSpatialCoordinate twoDimensionSpatialCoordinate)
+    {
+        this.twoDimensionSpatialCoordinates.remove(twoDimensionSpatialCoordinate);
+
     }
 
     public void setDescriptors(Set<Descriptor> descriptors) {

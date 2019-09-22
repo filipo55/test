@@ -8,6 +8,7 @@ import Measurement from './measurement';
 import Patient from './patient';
 import Study from './study';
 import Descriptor from './descriptor';
+import TwoDimensionSpatialCoordinate from './two-dimension-spatial-coordinate';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 const Routes = ({ match }) => (
@@ -18,6 +19,7 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute path={`${match.url}/patient`} component={Patient} />
       <ErrorBoundaryRoute path={`${match.url}/study`} component={Study} />
       <ErrorBoundaryRoute path={`${match.url}/descriptor`} component={Descriptor} />
+      <ErrorBoundaryRoute path={`${match.url}/two-dimension-spatial-coordinate`} component={TwoDimensionSpatialCoordinate} />
       {/* jhipster-needle-add-route-path - JHipster will add routes here */}
     </Switch>
   </div>

@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ImageAnnotationCollection xmlns="gme://caCORE.caCORE/4.4/edu.northwestern.radiology.AIM" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" aimVersion="AIMv4_0" xsi:schemaLocation="gme://caCORE.caCORE/4.4/edu.northwestern.radiology.AIM AIM_v4_rv44_XML.xsd">
+    <uniqueIdentifier root="e.5.c.2.b.1.bf5f.54f.6.6.c625ca1b4f48caeeac57fb64422a1e5d4f3061c"/>
+    <dateTime value="20190915181303"/>
+    <description value="test2"/>
+    <user>
+        <name/>
+        <loginName/>
+        <roleInTrial/>
+    </user>
+    <equipment>
+        <manufacturerName value="SIEMENS NM"/>
+        <manufacturerModelName value="IP1"/>
+        <softwareVersion value="1.0.16.11\3.0.30"/>
+    </equipment>
+    <person>
+        <name value="Gastric^Single_Isotope"/>
+        <id value="Penrose 7051808"/>
+        <birthDate value="19430127"/>
+        <sex value="F"/>
+        <ethnicGroup/>
+    </person>
+    <imageAnnotations>
+        <ImageAnnotation>
+            <uniqueIdentifier root="e.1.a.c.2.1.b2a7.c7c.6.4.db27bf5be3160c224d87722d793decb58c4b76b"/>
+            <typeCode code="AnyClosedShape" codeSystem=" " codeSystemName=" " codeSystemVersion=" "/>
+            <dateTime value="20190915181303"/>
+            <name value="test2"/>
+            <markupEntityCollection>
+                <MarkupEntity xsi:type="TwoDimensionPolyline">
+                    <uniqueIdentifier root="0.a.8.5.5.4.8f4c.730.4.d.29a3c1457af2e2c279fa7f100e0d5b7bbeec08d"/>
+                    <shapeIdentifier value="0"/>
+                    <includeFlag value="true"/>
+                    <imageReferenceUid root="1.3.12.2.1107.5.0.0.123.410.0.111340923889217"/>
+                    <referencedFrameNumber value="1"/>
+                    <twoDimensionSpatialCoordinateCollection>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="0"/>
+                            <x value="40.27053140096619"/>
+                            <y value="16.000000000000004"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="1"/>
+                            <x value="37.71980676328503"/>
+                            <y value="16.54106280193237"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="2"/>
+                            <x value="35.24637681159421"/>
+                            <y value="17.31400966183575"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="3"/>
+                            <x value="33.08212560386474"/>
+                            <y value="17.700483091787444"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="4"/>
+                            <x value="31.536231884057976"/>
+                            <y value="18.009661835748794"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="5"/>
+                            <x value="30.608695652173914"/>
+                            <y value="18.782608695652176"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="6"/>
+                            <x value="30.22222222222223"/>
+                            <y value="20.019323671497588"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="7"/>
+                            <x value="29.758454106280197"/>
+                            <y value="21.333333333333336"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="8"/>
+                            <x value="29.371980676328505"/>
+                            <y value="22.260869565217394"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="9"/>
+                            <x value="29.06280193236715"/>
+                            <y value="23.65217391304348"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="10"/>
+                            <x value="28.830917874396135"/>
+                            <y value="24.734299516908216"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="11"/>
+                            <x value="28.830917874396135"/>
+                            <y value="25.89371980676329"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="12"/>
+                            <x value="29.526570048309182"/>
+                            <y value="27.362318840579714"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="13"/>
+                            <x value="29.913043478260875"/>
+                            <y value="28.289855072463773"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="14"/>
+                            <x value="30.608695652173914"/>
+                            <y value="29.449275362318843"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="15"/>
+                            <x value="31.458937198067638"/>
+                            <y value="30.376811594202902"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="16"/>
+                            <x value="32.309178743961354"/>
+                            <y value="31.845410628019327"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="17"/>
+                            <x value="33.46859903381643"/>
+                            <y value="32.850241545893724"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="18"/>
+                            <x value="34.473429951690825"/>
+                            <y value="33.62318840579711"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="19"/>
+                            <x value="35.55555555555556"/>
+                            <y value="34.6280193236715"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="20"/>
+                            <x value="37.256038647343"/>
+                            <y value="35.632850241545896"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="21"/>
+                            <x value="38.02898550724638"/>
+                            <y value="36.32850241545894"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="22"/>
+                            <x value="39.574879227053145"/>
+                            <y value="37.48792270531401"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="23"/>
+                            <x value="41.816425120772955"/>
+                            <y value="38.80193236714976"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="24"/>
+                            <x value="44.753623188405804"/>
+                            <y value="40.34782608695653"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="25"/>
+                            <x value="47.072463768115945"/>
+                            <y value="41.19806763285025"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="26"/>
+                            <x value="50.39613526570049"/>
+                            <y value="42.1256038647343"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="27"/>
+                            <x value="53.41062801932368"/>
+                            <y value="42.58937198067633"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="28"/>
+                            <x value="54.80193236714977"/>
+                            <y value="42.58937198067633"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="29"/>
+                            <x value="56.193236714975846"/>
+                            <y value="42.58937198067633"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="30"/>
+                            <x value="58.04830917874397"/>
+                            <y value="41.12077294685991"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="31"/>
+                            <x value="58.821256038647356"/>
+                            <y value="39.8840579710145"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="32"/>
+                            <x value="60.05797101449276"/>
+                            <y value="38.64734299516909"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="33"/>
+                            <x value="60.83091787439614"/>
+                            <y value="37.56521739130435"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="34"/>
+                            <x value="61.52657004830919"/>
+                            <y value="36.32850241545894"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="35"/>
+                            <x value="61.99033816425122"/>
+                            <y value="34.550724637681164"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="36"/>
+                            <x value="62.37681159420291"/>
+                            <y value="32.46376811594203"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="37"/>
+                            <x value="62.53140096618359"/>
+                            <y value="30.299516908212563"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="38"/>
+                            <x value="62.53140096618359"/>
+                            <y value="28.676328502415462"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="39"/>
+                            <x value="62.37681159420291"/>
+                            <y value="27.362318840579714"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="40"/>
+                            <x value="61.91304347826088"/>
+                            <y value="25.89371980676329"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="41"/>
+                            <x value="61.52657004830919"/>
+                            <y value="24.96618357487923"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="42"/>
+                            <x value="60.83091787439614"/>
+                            <y value="23.65217391304348"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="43"/>
+                            <x value="60.135265700483096"/>
+                            <y value="22.106280193236717"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="44"/>
+                            <x value="59.671497584541065"/>
+                            <y value="20.946859903381647"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="45"/>
+                            <x value="58.97584541062803"/>
+                            <y value="19.323671497584545"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="46"/>
+                            <x value="58.04830917874397"/>
+                            <y value="17.77777777777778"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="47"/>
+                            <x value="57.275362318840585"/>
+                            <y value="16.695652173913047"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="48"/>
+                            <x value="56.65700483091788"/>
+                            <y value="15.613526570048311"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="49"/>
+                            <x value="56.11594202898551"/>
+                            <y value="14.531400966183577"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="50"/>
+                            <x value="55.26570048309179"/>
+                            <y value="13.217391304347828"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="51"/>
+                            <x value="54.57004830917875"/>
+                            <y value="11.903381642512079"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="52"/>
+                            <x value="53.02415458937199"/>
+                            <y value="10.821256038647345"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="53"/>
+                            <x value="51.86473429951691"/>
+                            <y value="10.357487922705316"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="54"/>
+                            <x value="49.62318840579711"/>
+                            <y value="10.821256038647345"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="55"/>
+                            <x value="48.00000000000001"/>
+                            <y value="11.516908212560388"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="56"/>
+                            <x value="46.53140096618358"/>
+                            <y value="11.980676328502417"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="57"/>
+                            <x value="45.06280193236716"/>
+                            <y value="12.753623188405799"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="58"/>
+                            <x value="43.82608695652174"/>
+                            <y value="13.294685990338166"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="59"/>
+                            <x value="42.89855072463769"/>
+                            <y value="13.835748792270532"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="60"/>
+                            <x value="41.971014492753625"/>
+                            <y value="14.454106280193239"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="61"/>
+                            <x value="41.42995169082126"/>
+                            <y value="15.304347826086959"/>
+                        </TwoDimensionSpatialCoordinate>
+                        <TwoDimensionSpatialCoordinate>
+                            <coordinateIndex value="0"/>
+                            <x value="40.27053140096619"/>
+                            <y value="16.000000000000004"/>
+                        </TwoDimensionSpatialCoordinate>
+                    </twoDimensionSpatialCoordinateCollection>
+                </MarkupEntity>
+            </markupEntityCollection>
+            <imageReferenceEntityCollection>
+                <ImageReferenceEntity xsi:type="DicomImageReferenceEntity">
+                    <uniqueIdentifier root="7.f.5.1.d.b.58cc.434.5.7.23f790e145c100c68da3ff7c8857a155ca312a3"/>
+                    <imageStudy>
+                        <instanceUid root="1.3.12.2.1107.5.0.0.123.410.0.111341622603233"/>
+                        <startDate value="20010220"/>
+                        <startTime value="082411.281000"/>
+                        <imageSeries>
+                            <instanceUid root="1.3.12.2.1107.5.0.0.123.410.0.111341710202372"/>
+                            <modality code="NM" codeSystem="1.2.840.10008.2.16.4" codeSystemName="DCM" codeSystemVersion="01"/>
+                            <imageCollection>
+                                <Image>
+                                    <sopClassUid root="1.2.840.10008.5.1.4.1.1.20"/>
+                                    <sopInstanceUid root="1.3.12.2.1107.5.0.0.123.410.0.111340923889217"/>
+                                </Image>
+                            </imageCollection>
+                        </imageSeries>
+                    </imageStudy>
+                </ImageReferenceEntity>
+            </imageReferenceEntityCollection>
+        </ImageAnnotation>
+    </imageAnnotations>
+</ImageAnnotationCollection>
