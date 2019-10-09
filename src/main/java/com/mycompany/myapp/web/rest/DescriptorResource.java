@@ -2,11 +2,10 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Descriptor;
 import com.mycompany.myapp.domain.Study;
-import com.mycompany.myapp.domain.TwoDimensionSpatialCoordinate;
 import com.mycompany.myapp.repository.StudyRepository;
+import com.mycompany.myapp.service.CalculationService;
 import com.mycompany.myapp.service.DescriptorService;
 import com.mycompany.myapp.service.StudyService;
-import com.mycompany.myapp.service.TwoDimensionSpatialCoordinateService;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -30,9 +29,11 @@ import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import net.minidev.json.JSONObject;
 
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -41,15 +42,30 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import java.io.File;
 
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import com.mycompany.myapp.parser.*;
+import org.xml.sax.XMLReader;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.*;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+import javax.xml.transform.*;
+import javax.xml.transform.sax.SAXSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+
 
 /**
  * REST controller for managing {@link com.mycompany.myapp.domain.Descriptor}.
@@ -68,11 +84,13 @@ public class DescriptorResource {
     private final DescriptorService descriptorService;
 
 
-    @Autowired
-    TwoDimensionSpatialCoordinateService twoDimensionSpatialCoordinateService;
+    //@Autowired
+    //TwoDimensionSpatialCoordinateService twoDimensionSpatialCoordinateService;
 
     @Autowired
     StudyService studyService;
+
+    CalculationService calculationService = new CalculationService();
 
     public DescriptorResource(DescriptorService descriptorService) {
         this.descriptorService = descriptorService;
@@ -86,7 +104,7 @@ public class DescriptorResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/descriptors")
-    public ResponseEntity<Descriptor> createDescriptor(@RequestBody String xml) throws URISyntaxException, ParseException, IOException, SAXException, ParserConfigurationException {
+    public ResponseEntity<Descriptor> createDescriptor(@RequestBody String xml) throws URISyntaxException, ParseException, IOException, SAXException, ParserConfigurationException, JAXBException, XMLStreamException {
         log.debug("REST request to create descriptor from xml:" + xml);
 
         File fXmlFile = new File(xml);
@@ -95,51 +113,104 @@ public class DescriptorResource {
         Document doc = dBuilder.parse(fXmlFile);
         doc.getDocumentElement().normalize();
 
-        String studyInstanceUID = doc.getElementsByTagName("imageStudy").item(0).getTextContent();
+        //String studyInstanceUID = doc.getElementsByTagName("imageStudy").item(0).getTextContent();
         Descriptor descriptor = new Descriptor();
         descriptor.setDateCreated(LocalDate.now());
 
-        NodeList coordinates = doc.getElementsByTagName("TwoDimensionSpatialCoordinate");
-        for (int i = 0; i < coordinates.getLength(); i++) {
+//        FileReader fr = null;
+//        fr = new FileReader(xml);
+//        XMLReader reader = new NamespaceFilterXMLReader("",false);
+//        InputSource is = new InputSource(fr);
+//        SAXSource ss = new SAXSource(reader, is);
 
-            Node nNode = coordinates.item(i);
+        XMLInputFactory xif = XMLInputFactory.newFactory();
+        xif.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, false);
+        StreamSource source = new StreamSource(xml);
+        XMLStreamReader xsr = xif.createXMLStreamReader(source);
 
-            System.out.println("\nCurrent Element :" + nNode.getNodeName());
-
-            if (nNode.getNodeType() == Node.ELEMENT_NODE)
-            {
-
-                Element eElement = (Element) nNode;
+        JAXBContext jaxbContext = JAXBContext.newInstance(ImageAnnotationCollection.class);
 
 
-                System.out.println("coordinateIndex : " + eElement.getChildNodes().item(1).getAttributes().item(0).getNodeValue());
-                System.out.println("x : " + eElement.getChildNodes().item(3).getAttributes().item(0).getNodeValue());
-                System.out.println("y : " + eElement.getChildNodes().item(5).getAttributes().item(0).getNodeValue());
+        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
-                TwoDimensionSpatialCoordinate temp = new TwoDimensionSpatialCoordinate();
-                temp.setCoordinateIndex(Integer.parseInt(eElement.getChildNodes().item(1).getAttributes().item(0).getNodeValue()));
-                temp.setX(Float.parseFloat(eElement.getChildNodes().item(3).getAttributes().item(0).getNodeValue()));
-                temp.setY(Float.parseFloat(eElement.getChildNodes().item(5).getAttributes().item(0).getNodeValue()));
 
-                twoDimensionSpatialCoordinateService.save(temp);
-                temp.setDescriptor(descriptor);
-            }
+        Source xmlInput = new StreamSource(new File(xml));
+        Source xsl = new StreamSource(new File("annotations.xsl"));
+        String resultFile = "transormedOutput.xml";
+        Result xmlOutput = new StreamResult(new File(resultFile));
+
+
+        try {
+            Transformer transformer = TransformerFactory.newInstance().newTransformer(xsl);
+            transformer.transform(xmlInput, xmlOutput);
+        } catch (TransformerException e) {
+            // Handle.
         }
 
 
-        if(!studyInstanceUID.isEmpty())
-        {
-            log.debug("Setting up study with UID: " + studyInstanceUID);
 
-            studyService.GetStudyByUID((studyInstanceUID)).ifPresent(study -> descriptor.setStudy(study));
-            if((studyService.GetStudyByUID((studyInstanceUID))).isPresent() == false)
-                log.debug("NO STUDY WITH UID: " + studyInstanceUID);
-        }
+        double area = calculationService.CalculateDataFromFile(xml);
 
-
-//        if (descriptor.getId() != null) {
-//            throw new BadRequestAlertException("A new descriptor cannot already have an ID", ENTITY_NAME, "idexists");
+//        ImageAnnotationCollection imageAnnotationCollection = (ImageAnnotationCollection) jaxbUnmarshaller.unmarshal(xsr);
+//        List<ImageAnnotation> imageAnnotations = imageAnnotationCollection.getImageAnnotations().getImageAnnotation();
+//
+//
+//        for (ImageAnnotation image: imageAnnotations
+//             ) {
+//
+//            for(int i =0; i< image.getMarkupEntityCollection().getMarkupEntity().size(); i++)
+//            {
+//                MarkupEntity markupEntity = image.getMarkupEntityCollection().getMarkupEntity().get(i);
+//                markupEntity.getUniqueIdentifier();
+//            }
+//
 //        }
+
+
+
+
+
+//        NodeList coordinates = doc.getElementsByTagName("TwoDimensionSpatialCoordinate");
+//        for (int i = 0; i < coordinates.getLength(); i++) {
+//
+//            Node nNode = coordinates.item(i);
+//
+//            System.out.println("\nCurrent Element :" + nNode.getNodeName());
+//
+//            if (nNode.getNodeType() == Node.ELEMENT_NODE)
+//            {
+//
+//                Element eElement = (Element) nNode;
+//
+//
+//                System.out.println("coordinateIndex : " + eElement.getChildNodes().item(1).getAttributes().item(0).getNodeValue());
+//                System.out.println("x : " + eElement.getChildNodes().item(3).getAttributes().item(0).getNodeValue());
+//                System.out.println("y : " + eElement.getChildNodes().item(5).getAttributes().item(0).getNodeValue());
+//
+//                TwoDimensionSpatialCoordinate temp = new TwoDimensionSpatialCoordinate();
+//                temp.setCoordinateIndex(Integer.parseInt(eElement.getChildNodes().item(1).getAttributes().item(0).getNodeValue()));
+//                temp.setX(Float.parseFloat(eElement.getChildNodes().item(3).getAttributes().item(0).getNodeValue()));
+//                temp.setY(Float.parseFloat(eElement.getChildNodes().item(5).getAttributes().item(0).getNodeValue()));
+//
+//                twoDimensionSpatialCoordinateService.save(temp);
+//                temp.setDescriptor(descriptor);
+//            }
+//        }
+
+
+//        if(!studyInstanceUID.isEmpty())
+//        {
+//            log.debug("Setting up study with UID: " + studyInstanceUID);
+//
+//            studyService.GetStudyByUID((studyInstanceUID)).ifPresent(study -> descriptor.setStudy(study));
+//            if((studyService.GetStudyByUID((studyInstanceUID))).isPresent() == false)
+//                log.debug("NO STUDY WITH UID: " + studyInstanceUID);
+//        }
+
+
+        if (descriptor.getId() != null) {
+            throw new BadRequestAlertException("A new descriptor cannot already have an ID", ENTITY_NAME, "idexists");
+        }
         Descriptor result = descriptorService.save(descriptor);
         return ResponseEntity.created(new URI("/api/descriptors/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))

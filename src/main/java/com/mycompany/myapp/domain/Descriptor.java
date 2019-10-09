@@ -1,5 +1,6 @@
 package com.mycompany.myapp.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.mycompany.myapp.parser.TwoDimensionSpatialCoordinate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -38,9 +39,9 @@ public class Descriptor implements Serializable {
     @Field("descriptors")
     private Set<Descriptor> descriptors = new HashSet<>();
 
-    @DBRef
-    @Field("twoDimensionalCoordinates")
-    private Set<TwoDimensionSpatialCoordinate> twoDimensionSpatialCoordinates = new HashSet<>();
+    //@DBRef
+    //@Field("twoDimensionalCoordinates")
+    //private Set<TwoDimensionSpatialCoordinate> twoDimensionSpatialCoordinates = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -111,18 +112,18 @@ public class Descriptor implements Serializable {
         return this;
     }
 
-    public void addTwoDimensionSpatialCoordinate(TwoDimensionSpatialCoordinate twoDimensionSpatialCoordinate)
-    {
-        this.twoDimensionSpatialCoordinates.add(twoDimensionSpatialCoordinate);
-        twoDimensionSpatialCoordinate.setDescriptor(this);
+//    public void addTwoDimensionSpatialCoordinate(TwoDimensionSpatialCoordinate twoDimensionSpatialCoordinate)
+//    {
+//        this.twoDimensionSpatialCoordinates.add(twoDimensionSpatialCoordinate);
+//        twoDimensionSpatialCoordinate.setDescriptor(this);
+//
+//    }
 
-    }
-
-    public void removeTwoDimensionSpatialCoordinate(TwoDimensionSpatialCoordinate twoDimensionSpatialCoordinate)
-    {
-        this.twoDimensionSpatialCoordinates.remove(twoDimensionSpatialCoordinate);
-
-    }
+//    public void removeTwoDimensionSpatialCoordinate(TwoDimensionSpatialCoordinate twoDimensionSpatialCoordinate)
+//    {
+//        this.twoDimensionSpatialCoordinates.remove(twoDimensionSpatialCoordinate);
+//
+//    }
 
     public void setDescriptors(Set<Descriptor> descriptors) {
         this.descriptors = descriptors;
